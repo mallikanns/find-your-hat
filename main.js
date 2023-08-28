@@ -6,6 +6,7 @@
 // Step 2 : Create class for creating instances of the game field
 // Step 3 : Create the Game Grid and place Holes
 // Step 4 : Place Home position and Hat position
+// Step 5 : Create method to drives the main game loop
 
 // Step 1 : Set up working directory and elements
 const prompt = require("prompt-sync")({ sigint: true }); // This sends a SIGINT, or “signal interrupt” message indicating that a user wants to exit a program by press Crtl+c
@@ -51,5 +52,30 @@ class Field {
       }
     }
     return field;
+  }
+
+  // Step 5 : Create method to drives the main game loop
+  play() {
+    let playing = true;
+    this.instruction();
+    while (playing) {
+      this.print();
+      this.acceptInput();
+      if (!this.isInBounds()) {
+        console.log("YOU LOSE, IT'S OUT OF BOUNDS!");
+        playing = false;
+        break;
+      } else if (this.isHole()) {
+        console.log("YOU LOSE, YOU FELL DOWN A HOLE!");
+        playing = false;
+        break;
+      } else if (this.isHat()) {
+        console.log("YOU WIN, YOU FOUND THE HAT!");
+        playing = false;
+        break;
+      }
+      // Update current position on the map
+      this.field[this.positionY][this.positionX] = pathCharacter;
+    }
   }
 }
