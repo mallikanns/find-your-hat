@@ -24,6 +24,7 @@ const pathCharacter = "👻";
 class Field {
   constructor(field = [[]]) {
     //The Field constructor take a two-dimensional array
+    this.field = field;
     // Step 4 : Place Home position and Hat position
     this.positionY = Math.floor(Math.random() * this.field.length);
     this.positionX = Math.floor(Math.random() * this.field[0].length);
@@ -65,6 +66,7 @@ class Field {
     while (playing) {
       this.print();
       this.acceptInput();
+      //Test the current location results
       if (!this.isInBounds()) {
         console.log("YOU LOSE, IT'S OUT OF BOUNDS!");
         playing = false;
@@ -127,6 +129,23 @@ class Field {
         break;
     }
   }
-  
+
   // Step 9 : Test the current location results
+  isInBounds() {
+    return (
+      this.positionY >= 0 &&
+      this.positionX >= 0 &&
+      this.positionY < this.field.length &&
+      this.positionX < this.field[0].length
+    );
+  }
+  isHole() {
+    return this.field[this.positionY][this.positionX] === hole; 
+  }
+  isHat() {
+    return this.field[this.positionY][this.positionX] === hat;
+  }
 }
+
+const newField = new Field(Field.generateField(20, 20, 0.3));
+newField.play();
