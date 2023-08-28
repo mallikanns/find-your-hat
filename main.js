@@ -109,6 +109,9 @@ class Field {
     const answer = prompt(
       "Which way do you want to go? --> "
     ).toLocaleLowerCase();
+    // Store the previous position for remove path character
+    const prevPositionY = this.positionY;
+    const prevPositionX = this.positionX;
     // Updating the current position
     switch (answer) {
       case "u":
@@ -128,9 +131,11 @@ class Field {
         this.acceptInput();
         break;
     }
+    // Remove the path character from the previous position
+    this.field[prevPositionY][prevPositionX] = fieldCharacter;
   }
 
-  // Step 9 : Test the current location results
+  // Step 9 : Test the current position results
   isInBounds() {
     return (
       this.positionY >= 0 &&
@@ -140,12 +145,12 @@ class Field {
     );
   }
   isHole() {
-    return this.field[this.positionY][this.positionX] === hole; 
+    return this.field[this.positionY][this.positionX] === hole;
   }
   isHat() {
     return this.field[this.positionY][this.positionX] === hat;
   }
 }
 
-const newField = new Field(Field.generateField(20, 20, 0.3));
+const newField = new Field(Field.generateField(10, 10, 0.3));
 newField.play();
