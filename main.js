@@ -9,7 +9,7 @@
 // Step 5 : Create method to drives the main game loop
 // Step 6 : Display the instruction
 // Step 7 : Display the Field map
-// Step 8 : Ask question and accept user input
+// Step 8 : Ask question, accept user input and updating the current position
 // Step 9 : Test the current location results
 
 // Step 1 : Set up working directory and elements
@@ -86,9 +86,10 @@ class Field {
   // Step 6 : Display the instruction
   instruction() {
     console.log(
-      "**INSTRUCTIONS - FIND THE HAT!** \nType U, D, L, R, (Up, Down, Left, Right) and press enter to find the hat\nPress Ctrl + C to exit.\n"
+      "** INSTRUCTIONS - FIND THE HAT! ** \nType U, D, L, R, (Up, Down, Left, Right) and press enter to find the hat\nPress Ctrl + C to exit.\n"
     );
   }
+
   // Step 7 : Display the Field map
   print() {
     // Formats arrays as strings
@@ -99,6 +100,33 @@ class Field {
     // Prints map in the console
     console.log(displayStringField);
   }
+
   // Step 8 : Ask question and accept user input
+  acceptInput() {
+    // Asking and accepting user input
+    const answer = prompt(
+      "Which way do you want to go? --> "
+    ).toLocaleLowerCase();
+    // Updating the current position
+    switch (answer) {
+      case "u":
+        this.positionY--;
+        break;
+      case "d":
+        this.positionY++;
+        break;
+      case "l":
+        this.positionX--;
+        break;
+      case "r":
+        this.positionX++;
+        break;
+      default:
+        console.log("Invalid. Please enter U, D, L or R.");
+        this.acceptInput();
+        break;
+    }
+  }
+  
   // Step 9 : Test the current location results
 }
