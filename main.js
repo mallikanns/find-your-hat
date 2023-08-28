@@ -1,5 +1,5 @@
-// JavaScript: Find your hat //
-// <GitHub Repo: >
+// JavaScript: Find your hat 
+// <GitHub Repo: https://github.com/mallikanns/find-your-hat>
 
 //Thinking process
 // Step 1 : Set up working directory and elements
@@ -10,7 +10,8 @@
 // Step 6 : Display the instruction
 // Step 7 : Display the Field map
 // Step 8 : Ask question, accept user input and updating the current position
-// Step 9 : Test the current location results
+// Step 9 : Test the current position results
+// Step 10 : Add mode to play
 
 // Step 1 : Set up working directory and elements
 const prompt = require("prompt-sync")({ sigint: true }); // This sends a SIGINT, or “signal interrupt” message indicating that a user wants to exit a program by press Crtl+c
@@ -19,6 +20,27 @@ const hat = "⭐";
 const hole = "🌳";
 const fieldCharacter = "⬛";
 const pathCharacter = "👻";
+
+// Step 10 : Add mode to play
+const chooseMode = () => {
+  const mode = prompt(
+    "Select mode: (E)asy or (N)ormal or (H)ard --> "
+  ).toLowerCase();
+  //set percentage on each mode
+  switch (mode) {
+    case "e":
+      return 0.2;
+      break;
+    case "n":
+      return 0.4;
+      break;
+    case "h":
+      return 0.5;
+      break;
+  }
+};
+// Updating percentage according to game mode
+let percentage = chooseMode();
 
 // Step 2 : Create class for creating instances of the game field
 class Field {
@@ -44,7 +66,7 @@ class Field {
   }
 
   // Step 3 : Create the Game Grid and place Holes
-  static generateField(height, width, percentage = 0.2) {
+  static generateField(height, width) {
     // Create 1D array by height
     let field = new Array(height);
     //Create 2D array by loop 1D array
@@ -152,5 +174,5 @@ class Field {
   }
 }
 
-const newField = new Field(Field.generateField(10, 10, 0.3));
+const newField = new Field(Field.generateField(10, 10));
 newField.play();
