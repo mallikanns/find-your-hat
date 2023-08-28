@@ -7,6 +7,10 @@
 // Step 3 : Create the Game Grid and place Holes
 // Step 4 : Place Home position and Hat position
 // Step 5 : Create method to drives the main game loop
+// Step 6 : Display the instruction
+// Step 7 : Display the Field map
+// Step 8 : Ask question and accept user input
+// Step 9 : Test the current location results
 
 // Step 1 : Set up working directory and elements
 const prompt = require("prompt-sync")({ sigint: true }); // This sends a SIGINT, or “signal interrupt” message indicating that a user wants to exit a program by press Crtl+c
@@ -78,4 +82,23 @@ class Field {
       this.field[this.positionY][this.positionX] = pathCharacter;
     }
   }
+
+  // Step 6 : Display the instruction
+  instruction() {
+    console.log(
+      "**INSTRUCTIONS - FIND THE HAT!** \nType U, D, L, R, (Up, Down, Left, Right) and press enter to find the hat\nPress Ctrl + C to exit.\n"
+    );
+  }
+  // Step 7 : Display the Field map
+  print() {
+    // Formats arrays as strings
+    const displayStringField = this.field
+      .map((row) => row.join(" "))
+      .join("\n");
+    clear();
+    // Prints map in the console
+    console.log(displayStringField);
+  }
+  // Step 8 : Ask question and accept user input
+  // Step 9 : Test the current location results
 }
